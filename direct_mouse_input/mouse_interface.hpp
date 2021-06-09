@@ -14,7 +14,7 @@ public:
 	mouse_interface()
 	{
 		LoadLibrary("user32.dll");
-		uintptr_t win32u = (uintptr_t)LoadLibrary("win32u.dll");
+		HMODULE win32u = LoadLibrary("win32u.dll");
 
 		if (!win32u)
 		{
@@ -24,7 +24,7 @@ public:
 
 		printf_s("[+] found win32u -> %p\n", win32u);
 
-		void* NtUserInjectMouseInputAddress = (void*)GetProcAddress((HMODULE)win32u, "NtUserInjectMouseInput");
+		void* NtUserInjectMouseInputAddress = (void*)GetProcAddress(win32u, "NtUserInjectMouseInput");
 
 		if (!NtUserInjectMouseInputAddress)
 		{
